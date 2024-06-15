@@ -1,0 +1,130 @@
+# Project information
+site_name: Deployaroo
+site_description: 'Comprehensive guide for Deployaroo'
+site_author: 'blink-zero'
+site_url: 'https://deployaroo.io'
+copyright: |
+  &copy; blink-zero
+
+# Repository information
+repo_name: blink-zero/deployaroo
+repo_url: https://github.com/blink-zero/deployaroo
+edit_uri: edit/main/docs/
+
+# Documentation source
+docs_dir: docs/
+
+# Navigation structure
+nav:
+  - Home: index.md
+  - Screenshots: screenshots.md
+  - Getting Started:
+      - Overview: getting-started/overview.md
+      - Prerequisites: getting-started/prerequisites.md
+      - Installation: getting-started/installation.md
+      - Initial Setup: getting-started/initial-setup.md
+  - Administrator Guide:
+      - Using the Application: admin-guide/using-the-application.md
+      - Non-Domain Network: admin-guide/non-domain-network.md
+      - Domain Network: admin-guide/domain-network.md
+      - Deploying Virtual Machines: admin-guide/deploying-vms.md
+      - VM Images Management: admin-guide/vm-images-management.md
+      - VM Images: admin-guide/vm-images.md
+      - Default VM Settings: admin-guide/default-vm-settings.md
+      - User and Group Management: admin-guide/user-group-management.md
+      - Backup and Restore: admin-guide/backup-restore.md
+      - Logs: admin-guide/logs.md
+      - History: admin-guide/history.md
+  - FAQ: faq.md
+  # - Developer Guide:
+  #     - Application Structure: developer-guide/application-structure.md
+  #     - Adding New Features: developer-guide/adding-new-features.md
+  - Change Log:
+      - v1.0.0beta: changelog/v1.0.0beta.md
+
+# Theme configuration
+theme:
+  name: material
+  language: en
+  logo: images/deployaroo_white.ico
+  favicon: images/deployaroo_white.ico
+  palette:
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to light mode
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to dark mode
+  font:
+    text: 'Roboto'
+    code: 'Roboto Mono'
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.indexes
+    - search.suggest
+    - search.highlight
+    - search.share
+    - toc.integrate
+    - header.autohide
+    - navigation.tracking
+  icon:
+    logo: material/library
+    repo: fontawesome/brands/github
+
+# Additional configuration
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/blink-zero/deployaroo
+  generator: false
+
+# Markdown extensions
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex
+  - pymdownx.betterem
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.magiclink
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.tasklist
+  - pymdownx.tilde
+
+# Plugins
+plugins:
+  - search
+  - minify:
+      minify_html: true
+  - redirects
+  - awesome-pages
+  - git-revision-date-localized
+  - git-authors
+  - mermaid2
+
+# Extra CSS and JavaScript
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/extra.js
