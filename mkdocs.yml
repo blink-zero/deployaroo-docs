@@ -114,11 +114,6 @@ markdown_extensions:
 # Plugins
 plugins:
   - search
-  - redirects
-  - awesome-pages
-  - git-revision-date-localized
-  - git-authors
-  - mermaid2
 
 # Extra CSS and JavaScript
 extra_css:
