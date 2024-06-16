@@ -40,6 +40,6 @@ I welcome contributions! Please read the [contributing guidelines](contributing.
 ---
 
 <div style="text-align: center;">
-  <img src="assets/screenshots/dashboard.png" alt="Deployaroo Dashboard" style="border: 1px solid #ddd; border-radius: 4px; padding: 5px; width: 80%;">
+  <img src="docs/assets/screenshots/dashboard.png" alt="Deployaroo Dashboard" style="border: 1px solid #ddd; border-radius: 4px; padding: 5px; width: 80%;">
 </div>
 
