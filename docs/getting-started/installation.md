@@ -69,6 +69,10 @@ Run the script twice and use one key for `SECRET_KEY` and the other for `ENCRYPT
          ENCRYPTION_KEY: 'your_encryption_key' # Change this
          APP_ADMIN_USER: 'administrator' # Change this
          APP_ADMIN_PASSWORD: 'password' # Change this
+       # Volumes are optional
+       volumes:
+         - deployaroo-data/logs:/home/project/app/logs
+         - deployaroo-data/backups:/home/project/app/apps/backups
        command: gunicorn -w 10 -b :8000 run:app --timeout 3600
 
      nginx:
