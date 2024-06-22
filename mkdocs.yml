@@ -40,6 +40,7 @@ nav:
   #     - Application Structure: developer-guide/application-structure.md
   #     - Adding New Features: developer-guide/adding-new-features.md
   - Change Log:
+      - v1.0.1beta: changelog/v1.0.1beta.md
       - v1.0.0beta: changelog/v1.0.0beta.md
 
 # Theme configuration
