@@ -1,33 +1,39 @@
+# Deployaroo Installation Guide
 
-# Installation
+## Prerequisites
 
-## Clone the Repository
+- Git
+- Python 3.x
+- pip (Python package manager)
+- Docker (optional, for containerized deployment)
 
-Clone the Deployaroo repository to your machine:
+## Installation Steps
+
+### 1. Clone the Repository
 
 ```sh
 git clone https://github.com/your-repo/deployaroo.git
 cd deployaroo
 ```
 
-## Generate Encryption and Secret Keys
-
-Install the cryptography library and generate the encryption and secret keys:
+### 2. Generate Encryption and Secret Keys
 
 ```sh
 pip install cryptography
 python3 ./generate_encryption_key.py
 ```
 
-Run the script twice to generate two different keys. Use one for `SECRET_KEY` and the other for `ENCRYPTION_KEY`.
+Run the script twice to generate two different keys:
+- Use one for `SECRET_KEY`
+- Use the other for `ENCRYPTION_KEY`
 
-Remember these for whichever method you use below.
-
----
+Remember these keys for the installation method you choose.
 
 ## Installation Options
 
-### Docker Run
+Choose one of the following installation methods:
+
+### A. Docker Run
 
 1. **Build the Docker Image**:
    ```sh
@@ -35,7 +41,7 @@ Remember these for whichever method you use below.
    ```
 
 2. **Run the Docker Container**:
-   ```
+   ```sh
    docker run -d \
      --name deployaroo-app \
      --restart always \
@@ -51,11 +57,9 @@ Remember these for whichever method you use below.
 3. **Access the Application**:
    Open your browser and navigate to `http://<IP>:8000`.
 
----
+### B. Docker Compose
 
-### Docker Compose
-
-1. **Add Variables to docker-compose.yml**:
+1. **Create or modify docker-compose.yml**:
    ```yaml
    version: '3'
    services:
@@ -66,11 +70,10 @@ Remember these for whichever method you use below.
        ports:
          - "8000:8000"
        environment:
-         SECRET_KEY: 'your_secret_key' # Change this
-         ENCRYPTION_KEY: 'your_encryption_key' # Change this
-         APP_ADMIN_USER: 'administrator' # Change this
-         APP_ADMIN_PASSWORD: 'password' # Change this
-       # Volumes are optional
+         SECRET_KEY: 'your_secret_key'
+         ENCRYPTION_KEY: 'your_encryption_key'
+         APP_ADMIN_USER: 'administrator'
+         APP_ADMIN_PASSWORD: 'password'
        volumes:
          - ./deployaroo-data/logs:/home/project/app/logs
          - ./deployaroo-data/backups:/home/project/app/apps/backups
@@ -96,21 +99,15 @@ Remember these for whichever method you use below.
 3. **Access the Application**:
    Open your browser and navigate to `http://<IP>:80`.
 
----
-
-### General Linux
+### C. General Linux
 
 1. **Set Environment Variables**:
-
-   Set the following environment variables with the generated keys
-
    ```sh
    export SECRET_KEY='your_generated_secret_key'
    export ENCRYPTION_KEY='your_generated_encryption_key'
    ```
-
-   **Alternatively**, you can update these values in `./apps/config.py`:
-
+   
+   Alternatively, update these values in `./apps/config.py`:
    ```python
    default_secret_key = 'your_generated_secret_key'
    default_encryption_key = 'your_generated_encryption_key'
