@@ -16,11 +16,12 @@ Install the cryptography library and generate the encryption and secret keys:
 
 ```sh
 pip install cryptography
-sudo chmod +x generate_encryption_key.py
-./generate_encryption_key.py
+python3 ./generate_encryption_key.py
 ```
 
-Run the script twice and use one key for `SECRET_KEY` and the other for `ENCRYPTION_KEY`.
+Run the script twice to generate two different keys. Use one for `SECRET_KEY` and the other for `ENCRYPTION_KEY`.
+
+Remember these for whichever method you use below.
 
 ---
 
@@ -99,17 +100,30 @@ Run the script twice and use one key for `SECRET_KEY` and the other for `ENCRYPT
 
 ### General Linux
 
-1. **Install Dependencies**:
+1. **Set Environment Variables**:
+
+   Set the following environment variables with the generated keys
+
+   ```sh
+   export SECRET_KEY='your_generated_secret_key'
+   export ENCRYPTION_KEY='your_generated_encryption_key'
+   ```
+
+   **Alternatively**, you can update these values in `./apps/config.py`:
+
+   ```python
+   default_secret_key = 'your_generated_secret_key'
+   default_encryption_key = 'your_generated_encryption_key'
+   ```
+
+2. **Install Dependencies**:
    ```sh
    pip install -r requirements.txt
    ```
 
-2. **Configuration**:
-   Configure your settings in the `config.yaml` file.
-
 3. **Run the Application**:
    ```sh
-   python app.py
+   python3 app.py
    ```
 
 4. **Access the Application**:
