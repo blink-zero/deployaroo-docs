@@ -1,12 +1,5 @@
 # Deployaroo Installation Guide
 
-## Prerequisites
-
-- Git
-- Python 3.x
-- pip (Python package manager)
-- Docker (optional, for containerized deployment)
-
 ## Installation Steps
 
 ### 1. Clone the Repository
