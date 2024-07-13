@@ -40,6 +40,9 @@ Ensure that the IP address, DNS name, username and password for the VMware confi
 ### How do I reset my password?
 If you need to reset your password, navigate to **Settings > General Tab**, enter your current password followed by the new password and confirmation password, then press **Change Password**. Alternatively, this can also be done through **Settings** > **Users / Groups**.
 
+### I'm recieving "ValueError: Fernet key must be 32 url-safe base64-encoded bytes."
+Make sure you have correctly specified the **ENCRYPTION_KEY** in you **docker-compose.yml** file, OR created the appropriate environment variable for it if deploying using one of the other methods. The environment variable is **ENCRYPTION_KEY**.
+
 ### How can I get support for Deployaroo?
 For support, you can contact me at [support@deployaroo.io](mailto:support@deployaroo.io) or submit an issue on the [GitHub page](https://github.com/blink-zero/deployaroo/issues).
 
