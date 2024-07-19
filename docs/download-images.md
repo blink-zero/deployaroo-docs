@@ -6,8 +6,6 @@ This page provides details about all available VM images and links to download t
 
 All of the Non-Domain and Domain Image Zip files come pre-uploaded in the application after initial deployment. Should you not have a need for some of these you can easily remove them as required from Settings > VM images after initial scan for images.
 
-Should you wish to download community images please see [this repo](https://github.com/blink-zero/deployaroo-images).
-
 ## Non-Domain Images
 
 | Image Name                                          | Author        | Image Type  | OS                                   | Description                                                                                             | Download Link                                               |
@@ -42,3 +40,11 @@ Should you wish to download community images please see [this repo](https://gith
 | Windows Server 2019 Datacenter - Desktop Experience | blink-zero    | Domain      | Windows Server 2019 Datacenter       | Windows Server 2019 Datacenter Desktop Experience VM for domain environments.                           | [Download](../../assets/domain/vmware_create_domain_windows_server2019dc_de.zip) |
 | Windows Server 2022 Datacenter - Core               | blink-zero    | Domain      | Windows Server 2022 Datacenter       | Windows Server 2022 Datacenter Core VM for domain environments.                                         | [Download](../../assets/domain/vmware_create_domain_windows_server2022dc_core.zip)    |
 | Windows Server 2022 Datacenter - Desktop Experience | blink-zero    | Domain      | Windows Server 2022 Datacenter       | Windows Server 2022 Datacenter Desktop Experience VM for domain environments.                           | [Download](../../assets/domain/vmware_create_domain_windows_server2022dc_de.zip) |
+
+## Community Images
+
+| Image Name                                          | Author        | Image Type  | OS                                   | Description                                                                                             | Download Link                                       |
+|-----------------------------------------------------|---------------|-------------|--------------------------------------|---------------------------------------------------------------------------------------------------------|-----------------------------------------------------|
+| Ubuntu 20.04 - OpenPLCv3                            | blink-zero    | Non-Domain  | Ubuntu 20.04                         | Minimal installation of Ubuntu 20.04 VM for non-domain environments with OpenPLC installed.             | [Download](../../assets/community/vmware_create_linux_ubuntu20.04_openplcv3.zip)       |
+| Ubuntu 22.04 - Docker and Docker Compose            | blink-zero    | Non-Domain  | Ubuntu 22.04                         | Minimal installation of Ubuntu 22.04 VM for non-domain environments with Docker & Docker Compose installed.  | [Download](../../assets/community/vmware_create_linux_ubuntu22.04_docker.zip) |
+| Windows 10 Pro - FactoryIO                          | blink-zero    | Non-Domain  | Windows 10 Professional              | Windows 10 Professional with FactoryIO and custom scene installed.                                        | [Download](../../assets/community/vmware_create_windows_10pro_factoryio.zip) |

@@ -35,6 +35,27 @@ nav:
       - Backup and Restore: admin-guide/backup-restore.md
       - Logs: admin-guide/logs.md
       - History: admin-guide/history.md
+  - Download Images: download-images.md
+  - v1.0.0-RC Docs:
+      - Home: v1.0.0rc-docs/index.md
+      - Screenshots: v1.0.0rc-docs/screenshots.md
+      - Getting Started:
+          # - Overview: v1.0.0rc-docs/getting-started/overview.md
+          - Prerequisites: v1.0.0rc-docs/getting-started/prerequisites.md
+          - Installation: v1.0.0rc-docs/getting-started/installation.md
+          - Initial Setup: v1.0.0rc-docs/getting-started/initial-setup.md
+      - Administrator Guide:
+          - Using the Application: v1.0.0rc-docs/admin-guide/using-the-application.md
+          - Non-Domain Network: v1.0.0rc-docs/admin-guide/non-domain-network.md
+          - Domain Network: v1.0.0rc-docs/admin-guide/domain-network.md
+          - Deploying Virtual Machines: v1.0.0rc-docs/admin-guide/deploying-vms.md
+          - VM Images Management: v1.0.0rc-docs/admin-guide/vm-images-management.md
+          - VM Images: v1.0.0rc-docs/admin-guide/vm-images.md
+          - Default VM Settings: v1.0.0rc-docs/admin-guide/default-vm-settings.md
+          - User and Group Management: v1.0.0rc-docs/admin-guide/user-group-management.md
+          - Backup and Restore: v1.0.0rc-docs/admin-guide/backup-restore.md
+          - Logs: v1.0.0rc-docs/admin-guide/logs.md
+          - History: v1.0.0rc-docs/admin-guide/history.md
   - FAQ: faq.md
   # - Developer Guide:
   #     - Application Structure: developer-guide/application-structure.md
