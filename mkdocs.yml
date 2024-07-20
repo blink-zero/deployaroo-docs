@@ -57,7 +57,8 @@ nav:
           - Logs: v1.0.0rc-docs/admin-guide/logs.md
           - History: v1.0.0rc-docs/admin-guide/history.md
   - FAQ: faq.md
-  # - Developer Guide:
+  - Developer Guide:
+      - Contributing: contributing.md
   #     - Application Structure: developer-guide/application-structure.md
   #     - Adding New Features: developer-guide/adding-new-features.md
   - Change Log:
