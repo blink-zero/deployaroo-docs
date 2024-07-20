@@ -116,3 +116,9 @@ To contribute a VM image to the community repository:
 ---
 
 By following these steps, you can efficiently manage VM images in Deployaroo, ensuring that your environment is always up-to-date and ready for deployment. Additionally, you can contribute to the community by submitting your own VM images.
+
+---
+
+**Simplify your VM deployments with Deployaroo**
+
+[Get Started](getting-started/overview.md) | [View Demo (Coming soon)](#) | [Report Bug](https://github.com/blink-zero/deployaroo/issues) | [Request Feature](https://github.com/blink-zero/deployaroo/issues)

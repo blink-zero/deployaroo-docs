@@ -27,3 +27,10 @@ Manage users and groups in Deployaroo via **Settings > Users / Groups**.
 ---
 
 **Note:** This part of the application is still a work in progress. I am exploring the best ways to enhance user and group management. If you have any suggestions, please feel free to share.
+
+
+---
+
+**Simplify your VM deployments with Deployaroo**
+
+[Get Started](getting-started/overview.md) | [View Demo (Coming soon)](#) | [Report Bug](https://github.com/blink-zero/deployaroo/issues) | [Request Feature](https://github.com/blink-zero/deployaroo/issues)

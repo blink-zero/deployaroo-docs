@@ -43,3 +43,9 @@ I welcome contributions! Please read the [contributing guidelines](contributing.
   <img src="assets/screenshots/dashboard.png" alt="Deployaroo Dashboard" style="border: 1px solid #ddd; border-radius: 4px; padding: 5px; width: 80%;">
 </div>
 
+---
+
+**Simplify your VM deployments with Deployaroo**
+
+[Get Started](getting-started/overview.md) | [View Demo (Coming soon)](#) | [Report Bug](https://github.com/blink-zero/deployaroo/issues) | [Request Feature](https://github.com/blink-zero/deployaroo/issues)
+

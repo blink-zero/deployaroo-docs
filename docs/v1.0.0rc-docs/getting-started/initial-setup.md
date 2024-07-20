@@ -1,10 +1,21 @@
 # Initial Setup
 
-Navigate to your deployed Deployaroo web application URL and log in using the credentials you specified during installation.
-
 ## 1. Change Your User Password
 
-For security purposes, it's crucial to change your default user password. Go to **Settings > General Tab**, enter your current password, followed by the new password and confirmation password, then press **Change Password**.
+### Change Default User Password
+
+> **Important:** Changing your default user password is crucial for maintaining the security of your account and the Deployaroo system.
+
+1. **Navigate to Password Settings:**
+    * Go to **Settings > General Tab**.
+
+2. **Enter Password Information:**
+    * Input your current password in the designated field.
+    * Type your new password in the 'New Password' field.
+    * Re-enter the new password in the 'Confirm Password' field.
+
+3. **Save New Password:**
+    * Press the **Change Password** button to update your credentials.
 
 ![Change Password Screenshot](../../assets/screenshots/settings_general.png)
 
@@ -12,25 +23,25 @@ For security purposes, it's crucial to change your default user password. Go to 
 
 ## 2. Setting Up VMware Configuration
 
-Ensure the VMware configuration is correctly connected; the Host Status in the top menu bar should change to **Reachable**.
+> **Tip**: Ensure the VMware configuration is correctly connected; the Host Status in the top menu bar should change to **Reachable**.
 
 ### Steps to Configure VMware Configuration
 
 1. **Add IP Address:**
-   - Navigate to **Settings > VMware Configuration**.
-   - Set the **ESXi Host IP** to the address of the ESXi host where you wish to deploy templates.
+    * Navigate to **Settings > VMware Configuration**.
+    * Set the **ESXi Host IP** to the address of the ESXi host where you wish to deploy templates.
 
 2. **Add vCenter DNS Name:**
-   - Set the **vCenter DNS Name** to the vCenter server you wish to use.
+    * Set the **vCenter DNS Name** to the vCenter server you wish to use.
 
 3. **Add vCenter Username:**
-   - Set the **vCenter User** to the username configured during the prerequisites stage.
+    * Set the **vCenter User** to the username configured during the prerequisites stage.
 
 4. **Add vCenter Password:**
-   - Set the **Password** to the vCenter user account password configured during the prerequisites stage.
+    * Set the **Password** to the vCenter user account password configured during the prerequisites stage.
 
 5. **Test and save:**
-   - Press **Test Connection** and ensure you get a successful message before pressing **Update Configuration**.
+    * Press **Test Connection** and ensure you get a successful message before pressing **Update Configuration**.
 
 ![Add VMware Configuration](../../assets/screenshots/settings_vmware_configuration.png)
 
@@ -38,13 +49,21 @@ Ensure the VMware configuration is correctly connected; the Host Status in the t
 
 ## 3. Setting Up Your Default VM Values
 
-**Default VM Values (Global)**
+> **Note:** Default values are already set for the **Default VM Values** section. Only change these if necessary for your specific deployment needs.
 
-Configure the default values for your virtual machines to streamline the deployment process. Note that default values are already set for the **Default VM Values** Section. If you need to change them, select the appropriate options, Press **Save Defaults** when you are satisfied. 
+### Default VM Values and Passwords Configuration
 
-**Passwords (Global)**
+1. **Configure Default VM Values:**
+    * Navigate to **Settings > Default VM Values**.
+    * Review the pre-set values in the **Default VM Values** section.
+    * Adjust any values as needed for your environment.
+    * Press **Save Defaults** when you are satisfied with your changes.
 
-Ensure you update the **Passwords (Global)** section with the template passwords for both Windows and Linux machines, press **Save Passwords** when you have entered in the passwords that your vm templates use.
+2. **Set Global Passwords:**
+    * Scroll to the **Passwords (Global)** section.
+    * Enter the template passwords for Windows machines.
+    * Enter the template passwords for Linux machines.
+    * Press **Save Passwords** after entering the passwords used by your VM templates.
 
 ![Default VM Values Screenshot](../../assets/screenshots/settings_defaultvm.png)
 
@@ -52,17 +71,24 @@ Ensure you update the **Passwords (Global)** section with the template passwords
 
 ## 4. Scanning VM Images
 
-### Scan Images
+> **Tip:** Regularly review and update your Deployaroo Images to maintain an accurate and efficient deployment environment. If you are looking to add more images to your deployaroo instance you can visit the "Download Images" Tab of this documentation and download supported and tested playbooks.
 
-By default images will not appear until after the first scan. On first run of Deployaroo, Please be sure to press **Scan Images**.
+### Scan and Configure Virtual Machine Images
 
-Navigate to **Settings > Virtual Machine Images**. Press **Scan Images** to scan for playbooks and ensure they are correctly configured and ready for deployment. Ensure that your template name aligns with the images you intend to deploy. 
+1. **Perform Initial Scan:**
+    * Navigate to **Settings > Virtual Machine Images**.
+    * Press **Scan Images** to initiate the first scan for playbooks. This step initially populates your Deployaroo database with all of the relevant fields for each Deployaroo image.
 
-As an example: **linux-centos-7-v23.01** should be a virtual machine within your VMware vCenter Server.
+2. **Review Scanned Images:**
+    * Verify that your VMware template names align with the Deployaroo images that you intend to deploy.
+    > **Example**: A template named **linux-centos-7-v23.01** should exist as a virtual machine template within your VMware environment if you would like to deploy CentOS 7 virtual machines. If an template exists, but is named differently you can change the template name on Deployaroo or VMware.
 
-Refer to the [prerequisites](../../getting-started/prerequisites) section for template deployment examples.
+3. **Manage Virtual Machine Images:**
+    * Review the list of scanned images in the **Virtual Machine Images** section.
+    * Delete any images that don't have corresponding templates in your VMware environment to avoid confusion when deploying machines.
 
-Tip: Delete any images from the **Virtual Machine Images** section to avoid any confusion. Only keep images that you know have the respective templates in your VMware environment.
+4. **Reference Prerequisites:**
+    * Refer to the [prerequisites](../../getting-started/prerequisites) section for VMware template deployment examples and best practices.
 
 ![Scan Images Screenshot](../../assets/screenshots/vm_image_management_scan.png)
 
@@ -70,12 +96,21 @@ Tip: Delete any images from the **Virtual Machine Images** section to avoid any 
 
 ## 5. Add a Non-Domain and/or Domain Networks
 
-Configure a non-domain network for your virtual machines. This step involves adding network configurations suitable for your environment. Details will vary based on your specific network setup.
+> Configure a non-domain network for your virtual machines. This step involves adding network configurations suitable for your environment. Details will vary based on your specific network setup.
 
-View the [Administrator Guide](../../admin-guide/using-the-application) to see how to configure.
+View the [Administrator Guide](../../admin-guide/using-the-application)
+
+* [Add a Non-Domain Network](../../admin-guide/non-domain-network)
+* [Add a Domain Network](../../admin-guide/domain-network)
 
 ---
 
 ## Next Step
 
-To continue setting up Deployaroo, please refer to the [Administrator Guide](../../admin-guide/vm-images-management).
+To continue, please refer to the [Administrator Guide](../../admin-guide/using-the-application).
+
+---
+
+**Simplify your VM deployments with Deployaroo**
+
+[Get Started](getting-started/overview.md) | [View Demo (Coming soon)](#) | [Report Bug](https://github.com/blink-zero/deployaroo/issues) | [Request Feature](https://github.com/blink-zero/deployaroo/issues)

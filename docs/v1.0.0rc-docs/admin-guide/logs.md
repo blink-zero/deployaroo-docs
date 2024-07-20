@@ -24,3 +24,9 @@ The logs section in Deployaroo provides detailed information about various actio
    - Click the `Download` button to download logs.
 
 ![Logs](../../assets/screenshots/logs.png)
+
+---
+
+**Simplify your VM deployments with Deployaroo**
+
+[Get Started](getting-started/overview.md) | [View Demo (Coming soon)](#) | [Report Bug](https://github.com/blink-zero/deployaroo/issues) | [Request Feature](https://github.com/blink-zero/deployaroo/issues)

@@ -23,3 +23,9 @@ The dropdown menu will be populated with information retrieved from the VMware v
 ---
 
 By following these steps, you can efficiently manage and add domain networks in the Deployaroo application.
+
+---
+
+**Simplify your VM deployments with Deployaroo**
+
+[Get Started](getting-started/overview.md) | [View Demo (Coming soon)](#) | [Report Bug](https://github.com/blink-zero/deployaroo/issues) | [Request Feature](https://github.com/blink-zero/deployaroo/issues)

@@ -41,7 +41,7 @@ Choose one of the following installation methods:
      -p 8000:8000 \
      -e SECRET_KEY='your_secret_key' \
      -e ENCRYPTION_KEY='your_encryption_key' \
-     -e APP_ADMIN_USER='administrator' \
+     -e APP_ADMIN_USER='admin' \
      -e APP_ADMIN_PASSWORD='password' \
      deployaroo \
      gunicorn -w 10 -b :8000 run:app --timeout 3600
@@ -49,8 +49,9 @@ Choose one of the following installation methods:
 
 3. **Access the Application**:
    Open your browser and navigate to `http://<IP>:8000`.
+   > Login using the credentials you set in the Docker Run
 
-### B. Docker Compose
+### B. Docker Compose (Recommended)
 
 1. **Create or modify docker-compose.yml**:
    ```yaml
@@ -65,7 +66,7 @@ Choose one of the following installation methods:
        environment:
          SECRET_KEY: 'your_secret_key'
          ENCRYPTION_KEY: 'your_encryption_key'
-         APP_ADMIN_USER: 'administrator'
+         APP_ADMIN_USER: 'admin'
          APP_ADMIN_PASSWORD: 'password'
        volumes:
          - ./deployaroo-data/logs:/home/project/app/logs
@@ -91,6 +92,7 @@ Choose one of the following installation methods:
 
 3. **Access the Application**:
    Open your browser and navigate to `http://<IP>:80`.
+   > Login using the credentials you set in the docker-compose.yml
 
 ### C. General Linux
 
@@ -118,9 +120,16 @@ Choose one of the following installation methods:
 
 4. **Access the Application**:
    Open your browser and navigate to `http://localhost:5000`.
+   > Login using the default credentials: **admin** / **password**
 
 ---
 
 ## Next Step
 
 To get started with Deployaroo, please refer to the [Initial Setup Guide](../initial-setup).
+
+---
+
+**Simplify your VM deployments with Deployaroo**
+
+[Get Started](getting-started/overview.md) | [View Demo (Coming soon)](#) | [Report Bug](https://github.com/blink-zero/deployaroo/issues) | [Request Feature](https://github.com/blink-zero/deployaroo/issues)

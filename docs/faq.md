@@ -56,3 +56,6 @@ The source code for Deployaroo is available on the [GitHub repository](https://g
 
 ---
 
+**Simplify your VM deployments with Deployaroo**
+
+[Get Started](getting-started/overview.md) | [View Demo (Coming soon)](#) | [Report Bug](https://github.com/blink-zero/deployaroo/issues) | [Request Feature](https://github.com/blink-zero/deployaroo/issues)

@@ -16,3 +16,9 @@ This is used for post deployment Ansible configuration.
 2. Click `Save Passwords` to update the passwords.
 
 ![Default VM Values](../../assets/screenshots/settings_defaultvm.png)
+
+---
+
+**Simplify your VM deployments with Deployaroo**
+
+[Get Started](getting-started/overview.md) | [View Demo (Coming soon)](#) | [Report Bug](https://github.com/blink-zero/deployaroo/issues) | [Request Feature](https://github.com/blink-zero/deployaroo/issues)

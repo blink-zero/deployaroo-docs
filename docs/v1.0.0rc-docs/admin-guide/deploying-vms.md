@@ -81,3 +81,9 @@ Once the deployment process is initiated, you can monitor the status of your VMs
 ---
 
 By following these steps, you can effectively deploy virtual machines in both non-domain and domain environments using Deployaroo.
+
+---
+
+**Simplify your VM deployments with Deployaroo**
+
+[Get Started](getting-started/overview.md) | [View Demo (Coming soon)](#) | [Report Bug](https://github.com/blink-zero/deployaroo/issues) | [Request Feature](https://github.com/blink-zero/deployaroo/issues)

@@ -28,3 +28,9 @@
 **Note:** Clearing history will not affect your configuration settings. It only deletes the history of VM deployments.
 
 ![Backup Restore](../assets/screenshots/backup_restore.png)
+
+---
+
+**Simplify your VM deployments with Deployaroo**
+
+[Get Started](getting-started/overview.md) | [View Demo (Coming soon)](#) | [Report Bug](https://github.com/blink-zero/deployaroo/issues) | [Request Feature](https://github.com/blink-zero/deployaroo/issues)

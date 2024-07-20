@@ -67,4 +67,6 @@ Welcome to the Deployaroo screenshots page! Here you can find visual examples of
 
 ---
 
-For more details on how to deploy and use Deployaroo, visit the [Getting Started](getting-started/overview.md) pages.
+**Simplify your VM deployments with Deployaroo**
+
+[Get Started](getting-started/overview.md) | [View Demo (Coming soon)](#) | [Report Bug](https://github.com/blink-zero/deployaroo/issues) | [Request Feature](https://github.com/blink-zero/deployaroo/issues)

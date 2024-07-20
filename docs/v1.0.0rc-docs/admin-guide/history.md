@@ -45,11 +45,11 @@ The history section in Deployaroo provides a comprehensive record of all VM depl
 ## Post Deployment Actions
 
 1. **Option 1: Increase Disk Size**:
-   - Click 
+   - Click Increase Disk Size
 2. **Option 2: Change User Password**:
-   - Click 
+   - Click Change User Password
 3. **Option 3: Update OS**:
-   - Click 
+   - Click Update OS
 
 ![Deployment History](../../assets/screenshots/history_postdeploymentactions_hl.png)
 
@@ -69,3 +69,9 @@ This can be done in **Settings > Backup**
 ---
 
 By regularly reviewing your deployment history, you can track the success and identify any issues with your deployment playbooks.
+
+---
+
+**Simplify your VM deployments with Deployaroo**
+
+[Get Started](getting-started/overview.md) | [View Demo (Coming soon)](#) | [Report Bug](https://github.com/blink-zero/deployaroo/issues) | [Request Feature](https://github.com/blink-zero/deployaroo/issues)
