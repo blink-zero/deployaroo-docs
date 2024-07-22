@@ -1,8 +1,10 @@
 # History
 
-The history section in Deployaroo provides a comprehensive record of all VM deployments. This allows you to track the status, progress, and details of each deployment.
+The history section in Deployaroo provides a comprehensive record of all VM deployments. This allows you to track the status, progress, and details of each deployment. You can also do post deployment actions such as increase disk size, update operating system and change user passwords.
 
 ## Accessing History
+
+> Note: A detailed view of each deployment can be retrieved by clicking on the the 'View Details' icon next to each VM.
 
 1. **Navigate to History**:
    - Go to the **History** section from the left-hand menu.
@@ -10,8 +12,8 @@ The history section in Deployaroo provides a comprehensive record of all VM depl
 2. **View Deployment History**:
    - The history page displays a list of all deployments, including:
      - **Deployment Date**: The date and time when the deployment was initiated.
-     - **VM Details**: Information about the VM, such as hostname, IP address, and image type.
-     - **Status**: The current status of the deployment (e.g., completed, in progress, failed).
+     - **VM Details**: Information about the VM, such as hostname, IP address, RAM, Environment and template name.
+     - **Status**: The current state of the deployment (e.g., completed, in progress, failed).
      - **Time Taken**: The amount of time taken for VM deployment and configuration.
 
 ![Deployment History](../../assets/screenshots/history.png)
@@ -45,11 +47,11 @@ The history section in Deployaroo provides a comprehensive record of all VM depl
 ## Post Deployment Actions
 
 1. **Option 1: Increase Disk Size**:
-   - Click Increase Disk Size
+   - Increase Disk Size
 2. **Option 2: Change User Password**:
-   - Click Change User Password
+   - Change User Password
 3. **Option 3: Update OS**:
-   - Click Update OS
+   - Update OS
 
 ![Deployment History](../../assets/screenshots/history_postdeploymentactions_hl.png)
 
