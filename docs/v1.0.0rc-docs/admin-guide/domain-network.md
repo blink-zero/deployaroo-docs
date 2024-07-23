@@ -1,6 +1,6 @@
 # Adding a Domain Network
 
-To add a Domain network in the Deployaroo app, follow these steps:
+To add a Domain network in the Deployaroo application, follow these steps:
 
 1. **Navigate to Domain Networks**:
    - Choose the **Domain** item in the left-hand menu.

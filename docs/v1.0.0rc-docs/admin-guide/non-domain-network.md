@@ -1,6 +1,6 @@
 # Adding a Non-Domain Network
 
-To add a Non-Domain network in the Deployaroo app, follow these steps:
+To add a Non-Domain network in the Deployaroo application, follow these steps:
 
 1. **Navigate to Non-Domain Networks**:
    - Choose the **Non-Domain** item in the left-hand menu.
