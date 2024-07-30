@@ -1,4 +1,4 @@
-![Deployaroo Logo](assets/deployaroo_text_lightgrey.png)
+![Deployaroo Logo](docs/assets/deployaroo_text_lightgrey.png)
 
 <p align="center">
   <a href="https://github.com/blink-zero/deployaroo/releases">
