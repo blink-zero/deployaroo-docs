@@ -1,104 +1,132 @@
 # VM Images Management
 
-Deployaroo comes pre-installed with a variety of default VM images. To view these images, navigate to **Settings > Virtual Machine Images**. Additionally, you can find a repository of confirmed working VM images [here](https://github.com/blink-zero/deployaroo-images). This repository contains default non-domain, domain, and community non-domain and domain playbook images that are pre-zipped. You can upload these if needed.
+## 1. Overview of VM Images
 
-## Adding VM Images
+### Understanding Pre-installed and Community Images
 
-To add new VM images to Deployaroo, follow these steps:
+> **Tip**: Familiarize yourself with both pre-installed and community images to leverage a wide range of deployment options.
 
-1. **Navigate to VM Images Section**:
-   - Go to **Settings** in the left-hand menu.
-   - Select **Virtual Machine Images**.
+1. **Access Pre-installed Images:**
+    * Navigate to **Settings > Virtual Machine Images** to view default VM images.
 
-2. **Upload Zip File**:
-   - Click the `Upload Zip` button at the top right of the screen.
-   - A file dialog will appear. Navigate to the location of the zip file containing your VM images.
-   - Select the zip file and click `Open`. The upload will begin immediately.
-   - Once the upload is complete, the new VM images will be added to the list.
+2. **Explore Community Images:**
+    * Visit the [Deployaroo Images Repository](https://github.com/blink-zero/deployaroo-images) for additional pre-zipped images or see the [Download Images](../../download-images) section of this documentation.
+    * This documentation includes non-domain, domain, and community playbook images.
 
-![Upload Zip](../../assets/screenshots/vm_image_management_upload_zip.png)
+## 2. Adding VM Images
 
-## Scanning for Images
+### Upload New Images to Deployaroo
 
-To update the list of available VM images by Scanning:
+> **Important:** Ensure you have the correct zip file containing VM image .yaml and .json before starting the upload process.
 
-1. **Initiate Scan**:
-   - Click the `Scan Images` button at the top right of the **Virtual Machine Images** page.
-   - The application will start scanning for new or updated VM images.
+1. **Navigate to VM Images Section:**
+    * Go to **Settings** in the left-hand menu.
+    * Select **Virtual Machine Images**.
 
-2. **Update List**:
-   - The scan process will automatically detect and add any new VM images to the list.
-   - You will see a notification once the scan is complete, and the list will be refreshed with the latest images.
+2. **Upload Zip File:**
+    * Click the `Upload Zip` button at the top right of the screen.
+    * In the file dialog, locate and select your VM image zip file.
+    * Click `Open` to start the upload process.
+    * Wait for the upload to complete and new images to appear in the list.
 
-![Scan Images](../../assets/screenshots/vm_image_management_scan_images.png)
+![Upload Zip](../assets/screenshots/vm_image_management_upload_zip.png)
 
-## Viewing Image Details
+## 3. Scanning for Images
 
-To view detailed information about a specific VM image:
+### Update Available VM Images List
 
-1. **Select Image**:
-   - On the **Virtual Machine Images** page, find the image you want to view.
-   - Click the `Details` button next to the image.
+> **Note:** Scanning helps keep your VM image list up-to-date with the latest additions and modifications, A scan is required after intial install of Deployaroo.
 
-2. **View Details**:
-   - A modal window will appear showing detailed information about the VM image, including the image name, template used, and other relevant details.
+1. **Initiate Scan:**
+    * On the **Virtual Machine Images** page, click the `Scan Images` button at the top right.
+    * The application will begin scanning for new or updated VM images.
 
-![View Details](../../assets/screenshots/vm_image_management_view_details.png)
+2. **Review Updated List:**
+    * Wait for the scan to complete. You'll see a notification when it's done.
+    * The list will automatically refresh to show the latest images.
 
-## Viewing Playbook Details
+![Scan Images](../assets/screenshots/vm_image_management_scan_images.png)
 
-To view the Ansible playbook associated with a specific VM image:
+## 4. Managing Image Details
 
-1. **Select Image**:
-   - On the **Virtual Machine Images** page, find the image for which you want to view the playbook.
-   - Click the `View Playbook` button.
+### View and Modify Image Information
 
-2. **View Playbook**:
-   - A modal window will open displaying the contents of the playbook. This includes all the tasks and configurations defined for the VM image.
+> **Tip:** Regularly review image details to ensure they align with your deployment needs.
 
-![View Details](../../assets/screenshots/vm_image_management_view_details.png)
+1. **View Image Details:**
+    * On the **Virtual Machine Images** page, find the desired image.
+    * Click the `Details` button next to the image.
+    * Review the information in the modal window that appears.
 
-## Modifying Images
+![View Details](../assets/screenshots/vm_image_management_view_details.png)
 
-Currently, you can only modify the human-readable name and the template used by the playbook for each VM image:
+2. **View Playbook Details:**
+    * Locate the image whose playbook you want to view.
+    * Click the `View Playbook` button.
+    * Examine the playbook contents in the modal window.
 
-1. **Select Image**:
-   - On the **Virtual Machine Images** page, find the image you want to modify.
-   - Click the `Edit` button.
+![View Details](../assets/screenshots/vm_image_management_view_playbook.png)
 
-2. **Modify Details**:
-   - In the modal window that appears, you can change the **Human Name** and the **Template Name** fields.
-   - Once you have made the desired changes, click `Save changes` to apply the modifications.
+3. **Modify Image Details:**
+    * Find the image you want to modify and click the `Edit` button.
+    * In the modal window, update the **Human Name** and **Template Name** fields as needed.
+    * Click `Save changes` to apply your modifications.
 
-![Modify Image](../../assets/screenshots/vm_image_management_modify_image.png)
+![Modify Image](../assets/screenshots/vm_image_management_modify_image.png)
 
-## Submitting a Community Image
+## 5. Deleting Images
 
-To contribute a VM image to the community repository:
+### Remove Unwanted VM Images
 
-1. **Prepare Your Image**:
-   - Ensure your playbook is fully tested.
-   - Create a zip file containing the playbook yml and the settings.json file.
-   - Check that the Folder Name doesnt conflict with any other playbooks folder names.
+> **Important:** Deleting an image is irreversible. Ensure you no longer need the image before proceeding.
 
-2. **Submit Your Image**:
-   - Navigate to the community repository [here](https://github.com/blink-zero/deployaroo-images).
-   - Fork the repository to your GitHub account.
-   - Add your zip file to the appropriate folder in your forked repository.
-   - Commit the changes and create a pull request to the original community repository.
+1. **Select Image for Deletion:**
+    * On the **Virtual Machine Images** page, locate the image to be deleted.
+    * Click the `Delete` button next to the image.
 
-3. **Provide Details**:
-   - In the pull request description, provide detailed information about your VM image, including:
-     - Image type (non-domain, domain, etc.)
-     - Use case
-     - Any special configurations
-     - Instructions for use
+2. **Confirm Deletion:**
+    * In the confirmation modal, review the image details.
+    * Click `Delete` to permanently remove the image.
 
-4. **Wait for Review**:
-   - Your submission will be reviewed by the repository maintainers.
-   - Once approved, your image will be added to the community repository.
-   - Documentation site will be updated.
+![Modify Image](../assets/screenshots/vm_image_management_delete_image.png)
+
+## 6. Contributing Community Images
+
+### Submit Your VM Image to the Community Repository
+
+> **Tip:** Contributing to the community repository helps expand the range of available images for all Deployaroo users.
+
+1. **Prepare Your Image:**
+    * Thoroughly test your playbook.
+    * Create a zip file containing the playbook yml and settings.json file.
+    * Ensure the folder name doesn't conflict with existing playbooks.
+
+2. **Submit Your Image:**
+    * Visit the [Deployaroo Images Repository](https://github.com/blink-zero/deployaroo-images).
+    * Fork the repository to your GitHub account.
+    * Add your zip file to the appropriate folder in your fork.
+    * Commit changes and create a pull request to the original repository.
+
+3. **Provide Submission Details:**
+    * In the pull request description, include:
+        - Image type (non-domain, domain, etc.)
+        - Use case
+        - Special configurations (if any)
+        - Usage instructions
+
+4. **Await Review:**
+    * Repository maintainers will review your submission.
+    * Upon approval, your image will be added to the community repository.
+    * The documentation site will be updated accordingly.
+
+## Next Steps
+
+After managing your VM images, you may want to:
+
+* [Download Images](../../download-images)
 
 ---
 
-By following these steps, you can efficiently manage VM images in Deployaroo, ensuring that your environment is always up-to-date and ready for deployment. Additionally, you can contribute to the community by submitting your own VM images.
+**Simplify your VM deployments with Deployaroo**
+
+[Get Started](getting-started/overview.md) | [View Demo (Coming soon)](#) | [Report Bug](https://github.com/blink-zero/deployaroo/issues) | [Request Feature](https://github.com/blink-zero/deployaroo/issues)

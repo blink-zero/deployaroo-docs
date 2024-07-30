@@ -1,26 +1,86 @@
-# Logs
+# Logs Management
 
-The logs section in Deployaroo provides detailed information about various actions and events within the application. This is crucial for monitoring, debugging, and ensuring the smooth operation of your deployments.
+## 1. Understanding Deployaroo Logs
 
-## Accessing Logs
+### Overview of Log Types and Their Importance
 
-1. **Navigate to Logs**:
-   - Go to the **Logs** section from the left-hand menu.
+> **Tip**: Regular review of logs helps in proactive management and troubleshooting of your Deployaroo environment.
 
-2. **View Logs**:
-   - You can view different types of logs, including:
-     - **Application Logs**: General logs about the application's operation.
-     - **Deployment Logs**: Detailed logs about each VM deployment, including ansible inventory files.
-     - **Error Logs**: Logs specifically for errors that occur within the application.
+1. **Types of Logs:**
+    * **Info**: General informational logs about normal application operations.
+    * **Warning**: Logs that indicate potential issues or anomalies that don't interrupt operations but may require attention.
+    * **Error**: Logs that record critical issues or failures within the application.
 
-## Searching Logs
+2. **Importance of Logs:**
+    * Logs are crucial for monitoring, debugging, and ensuring smooth operation of your deployments.
+    * They provide insights into system performance, user actions, and potential issues.
 
-1. **Filter Logs**:
-   - Apply filters to narrow down the log entries by date, type, or severity.
+## 2. Accessing Logs
 
-## Exporting Logs
+### Navigate to the Logs Section
 
-1. **Export Logs**:
-   - Click the `Download` button to download logs.
+> **Note**: Ensure you have the necessary permissions to access and view logs.
 
-![Logs](../../assets/screenshots/detailed_logs.png)
+1. **Access Logs Menu:**
+    * Locate and click on the **Logs** option in the main navigation menu on the left-hand side.
+
+2. **View Log Entries:**
+    * Once in the Logs section, you'll see a list of log entries categorized by their type (Info, Warning, Error).
+
+## 3. Viewing and Analyzing Logs
+
+### Explore Different Log Types
+
+1. **Info Logs:**
+    * These logs provide information about normal application operations.
+    * Use them to track routine activities and successful processes.
+
+2. **Warning Logs:**
+    * Warning logs indicate potential issues that don't interrupt operations but may require attention.
+    * Review these regularly to prevent potential problems from escalating.
+
+3. **Error Logs:**
+    * Error logs record critical issues or failures within the application.
+    * Prioritize reviewing and addressing these logs to maintain system stability.
+
+## 4. Searching and Filtering Logs
+
+### Efficiently Find Relevant Log Entries
+
+> **Tip**: Effective use of filters can significantly reduce the time spent on log analysis.
+
+1. **Apply Date Filters:**
+    * Use date range filters to narrow down logs to a specific time period.
+
+2. **Filter by Log Type:**
+    * Select specific log types (Info, Warning, or Error) to focus on particular areas of concern.
+
+3. **Combine Filters:**
+    * Utilize multiple filters simultaneously for more precise log analysis.
+
+## 5. Exporting Logs
+
+### Download Logs for External Analysis or Archiving
+
+1. **Initiate Log Export:**
+    * Locate the `Download` button in the Logs section.
+
+2. **Select Export Parameters:**
+    * Choose the type of logs you want to export (Info, Warning, Error, or All).
+    * Specify the date range if applicable.
+
+3. **Download Log File:**
+    * Click the `Download` button to start the export process.
+    * Save the exported log file to your desired location.
+
+## Next Steps
+
+After familiarizing yourself with log management, consider:
+
+* [View History](../../admin-guide/history)
+
+---
+
+**Simplify your VM deployments with Deployaroo**
+
+[Get Started](getting-started/overview.md) | [View Demo (Coming soon)](#) | [Report Bug](https://github.com/blink-zero/deployaroo/issues) | [Request Feature](https://github.com/blink-zero/deployaroo/issues)
