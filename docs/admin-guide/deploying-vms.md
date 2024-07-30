@@ -1,83 +1,99 @@
 # Deploying Virtual Machines
 
-Deployaroo allows you to deploy virtual machines (VMs) in both non-domain and domain networks. You can choose to operate in single mode or multiple mode for deploying VMs. Follow these detailed steps to deploy your VMs efficiently.
+## 1. Selecting Deployment Environment
 
-## Steps to Deploy Virtual Machines
+### Choose Network Type and Location
 
-1. **Navigate to the Network under Non-Domain or Domain**:
+> **Tip**: Deployaroo supports VM deployment in both non-domain and domain networks. Ensure you have the correct network configured before proceeding.
 
-![Select Network](../../assets/screenshots/vm_creation_select_network.png)
+1. **Access Network Selection:**
+    * Navigate to either the **Non-Domain** or **Domain** section in the left-hand menu, depending on your deployment needs.
+    * Select the specific network where you want to deploy your VM(s).
 
-2. **Select Deployment Mode**:
-   - Flick the toggle button near the top right of the box to select the mode of operation.
-   - You can choose to operate in **Single Mode** or **Multiple Mode**:
-     - **Single Mode**: Deploy a single VM.
-     - **Multiple Mode**: Stage and Deploy multiple VMs at once.
-   *Further details on the modes of operation can be seen below*
+![Select Network](../assets/screenshots/vm_creation_select_network.png)
 
-![Select Operation Mode](../../assets/screenshots/vm_creation_select_mode.png)
+## 2. Choosing Deployment Mode
 
-3. **Enter VM Details**:
-   - Fill in the following required details for each VM:
-     - **Hostname**: The name of the VM you want to deploy.
-     - **IP Address**: The IP address for the VM.
-     - **Image Type**: Select the VM image type from the available options.
-     - **CPU**: Number of CPU cores for the VM.
-     - **RAM**: Amount of RAM for the VM.
+### Select Single or Multiple VM Deployment
 
-![VM Details](../../assets/screenshots/vm_creation_details.png)
+> **Note:** The default setting is Single Mode. Adjust this based on your deployment requirements.
 
-4. **Configure Additional Settings** (if applicable):
-   - Depending on your deployment mode and image type, you may need to configure additional settings such as domain information or specific VM information.
+1. **Locate Mode Toggle:**
+    * Find the toggle button near the top right of the deployment box.
 
-5. **Review Configuration**:
-   - Double-check all entered details to ensure accuracy.
+2. **Select Deployment Mode:**
+    * **Single Mode**: For deploying one VM at a time.
+    * **Multiple Mode**: For staging and deploying multiple VMs simultaneously.
 
-6. **Deploy the VM(s)**:
-   - Click the **Create VM** button to start the deployment process in single mode or click **Stage VM** to stage multiple VMs before ultimately clicking **Deploy VMs**.
-   - The app will build the Ansible inventory file and start the deployment of the VMs after this.
+![Select Operation Mode](../assets/screenshots/vm_creation_select_mode.png)
 
-![Deploy VM](../../assets/screenshots/vm_creation_deploy_vm.png)
+## 3. Configuring VM Details
 
-## Deployment Modes
+### Enter Essential VM Information
 
-### Single Mode
+> **Important:** Accurate VM details are crucial for successful deployment. Double-check all information before proceeding.
 
-In Single Mode, you deploy one VM at a time:
+1. **Fill in Required Fields:**
+    * **Hostname**: Enter the desired name for the VM.
+    * **IP Address**: Specify the IP address for the VM.
+    * **Image Type**: Choose the appropriate VM image from available options.
+    * **CPU**: Set the number of CPU cores for the VM.
+    * **RAM**: Determine the amount of RAM for the VM.
 
-1. **Select Single Mode** (this is the default setting):
-   - Fill in the required details (Hostname, IP Address, Image Type, CPU, RAM).
+2. **Configure Additional Settings (if applicable):**
+    * For domain networks, you may need to enter domain-specific information.
+    * Certain image types may require additional configuration.
 
-2. **Deploy the VM**:
-   - Click **Create VM** to start the deployment of the single VM.
+![VM Details](../assets/screenshots/vm_creation_details.png)
 
-![Deploy VM - Single Mode](../../assets/screenshots/vm_creation.png)
+## 4. Deploying Virtual Machines
 
-### Multiple Mode
+### Initiate VM Deployment Process
 
-In Multiple Mode, you can deploy multiple VMs at once:
+> **Tip:** In Multiple Mode, stage all desired VMs before initiating deployment.
 
-1. **Select Multiple Mode**:
-   - Ensure you are in Multiple Mode.
-   - Fill in the required details for each VM and press **Stage VM** once per machine. The VMs will appear in the right side panel with their details.
+1. **For Single Mode Deployment:**
+    * After entering VM details, click the **Create VM** button to start the deployment process.
 
-2. **Deploy the VMs**:
-   - Click **Deploy VMs** to start the deployment of all specified VMs. This will create an inventory file per VM and kick off the relevant playbook for all the VMs at once.
+2. **For Multiple Mode Deployment:**
+    * Enter details for each VM and click **Stage VM**.
+    * Repeat for all desired VMs.
+    * Once all VMs are staged, click **Deploy VMs** to initiate deployment of all staged VMs.
 
-![Deploy VM - Multiple Mode](../../assets/screenshots/vm_creation_multiple.png)
+![Deploy VM](../assets/screenshots/vm_creation_deploy_vm.png)
 
-## Monitoring Deployment
+### Single Mode Deployment
 
-Once the deployment process is initiated, you can monitor the status of your VMs:
+![Deploy VM - Single Mode](../assets/screenshots/vm_creation_singlemode.png)
 
-- **History**: Track the progress of your VM deployments in real-time via Ansible logs.
+### Multiple Mode Deployment
 
-![Deployment History](../../assets/screenshots/deployment_history_ansible_log.png)
+![Deploy VM - Multiple Mode](../assets/screenshots/vm_creation_multiplemode.png)
 
-- **Logs**: Access detailed logs to review any issues related to Deployaroo.
+## 5. Monitoring Deployment Progress
 
-![Detailed Logs](../../assets/screenshots/detailed_logs.png)
+### Track VM Deployment Status
+
+> **Note:** Deployaroo provides real-time updates on deployment progress through various logging features.
+
+1. **Access Deployment History:**
+    * Navigate to the **History** section to view real-time progress of VM deployments via Ansible logs.
+
+![Deployment History](../../assets/screenshots/history_ansiblelog.png)
+
+2. **Review Detailed Logs:**
+    * Access the **Logs** section for comprehensive information about the deployment process and any potential issues.
+
+![Detailed Logs](../../assets/screenshots/logs.png)
+
+## Next Steps
+
+After deploying your virtual machines, you may want to:
+
+* [Manage VM Images](../../admin-guide/vm-images-management)
 
 ---
 
-By following these steps, you can effectively deploy virtual machines in both non-domain and domain environments using Deployaroo.
+**Simplify your VM deployments with Deployaroo**
+
+[Get Started](getting-started/overview.md) | [View Demo (Coming soon)](#) | [Report Bug](https://github.com/blink-zero/deployaroo/issues) | [Request Feature](https://github.com/blink-zero/deployaroo/issues)

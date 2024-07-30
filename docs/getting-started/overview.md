@@ -1,29 +1,23 @@
 # Overview
 
-<img src="../../assets/deployaroo_text_lightgrey.png" alt="Deployaroo Logo" width="400px" style="display: block; margin-left: auto; margin-right: auto;">
-
----
-
 **Deployaroo** is a sleek and intuitive web interface for deploying VMware vSphere virtual machine templates using Ansible.
-
-## Key Highlights
-
-- **User-Friendly Interface:** Intuitive and easy-to-navigate web interface.
-- **Powerful Automation:** Leverages Ansible for seamless automation of VM deployment and management.
-- **Comprehensive Management:** Manage VM templates, user permissions, deployment logs, and more.
 
 > **Note:** Ensure all prerequisites are met to guarantee a successful deployment of Deployaroo. VM Templates are mandatory.
 
 ---
 
-## Features
+## Key Features
 
-- **Simplified VM Deployment:** Quickly deploy VMs with pre-configured templates.
-- **Real-Time Monitoring:** Track deployment progress and view detailed logs.
-- **Customizable Templates:** Use and manage custom VM templates.
-- **User Management:** Control user access and permissions.
-- **Template Management:** Create, update, and manage VM templates.
-- **Comprehensive Logs:** Access detailed logs for all deployments and actions.
+- **☁️ Easy VM Creation**: Streamline the process of creating both domain-joined and non-domain virtual machines.
+- **📊 Statistics Dashboard**: View statistics related to deployments.
+- **📜 Deployment History**: Access records of all running, completed, and failed deployments. View Ansible logs for each deployment.
+- **🛠 Post Deployment Actions**: Run post-deployment actions on your deployed VMs, such as expanding disks or updating OS.
+- **🔍 Detailed Logs**: Access detailed logs on all events within the application.
+- **👥 User Management**: Efficiently manage user access and permissions.
+- **💾 Backup & Restore**: Create backups and restore them as needed.
+- **🖼️ VM Image Management**: Manage your "VM Images" and upload custom image Ansible playbooks for deployment.
+- **⚙️ Flexible Deployment**: Deploy Deployaroo as a Docker container or on a Linux machine.
+- **🔔 Notifications**: Receive Discord notifications on your VM deployments using webhooks.
 
 ---
 
@@ -34,3 +28,9 @@
 ## Next Step
 
 To get started with Deployaroo, please refer to the [Prerequisites Guide](../prerequisites).
+
+---
+
+**Simplify your VM deployments with Deployaroo**
+
+[Get Started](getting-started/overview.md) | [View Demo (Coming soon)](#) | [Report Bug](https://github.com/blink-zero/deployaroo/issues) | [Request Feature](https://github.com/blink-zero/deployaroo/issues)

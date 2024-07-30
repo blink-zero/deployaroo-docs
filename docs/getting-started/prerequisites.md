@@ -1,6 +1,6 @@
 # Prerequisites
 
-**Disclaimer:** This document is a working draft. Please submit an issue on the [GitHub page](https://github.com/blink-zero/deployaroo/issues) if you find any problems with it.
+> **Disclaimer:** This document is a working draft. Please submit an issue on the [GitHub page](https://github.com/blink-zero/deployaroo/issues) if you find any problems with it.
 
 ---
 
@@ -65,7 +65,7 @@ Clone the default **Read-Only** vSphere role and add the following privileges, N
 4. In the left pane, select **Access control** > **Global permissions** and click the **Add permissions** icon.
 5. In the **Add permissions** dialog box, enter the service account (e.g., `service_deployaroo`), select the custom role (e.g., Deployaroo_role), and click **OK**.
 
-## Virtual Machine Templates
+## Create Virtual Machine Templates
 
 Deployaroo comes with pre-written Ansible playbooks that use VMware templates. If these templates do not exist, the playbooks will fail. Ensure that:
 
@@ -182,10 +182,16 @@ Manually creating and configuring a VM involves installing the OS, setting up cl
 
 ---
 
-**Disclaimer:** This document is a working draft. Please submit an issue on the [GitHub page](https://github.com/blink-zero/deployaroo/issues) if you find any problems with it.
+> **Disclaimer:** This document is a working draft. Please submit an issue on the [GitHub page](https://github.com/blink-zero/deployaroo/issues) if you find any problems with it.
 
 ---
 
 ## Next Step
 
 To get started with Deployaroo, please refer to the [Installation Guide](../installation).
+
+---
+
+**Simplify your VM deployments with Deployaroo**
+
+[Get Started](getting-started/overview.md) | [View Demo (Coming soon)](#) | [Report Bug](https://github.com/blink-zero/deployaroo/issues) | [Request Feature](https://github.com/blink-zero/deployaroo/issues)
