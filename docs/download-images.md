@@ -47,7 +47,7 @@ All of the Non-Domain and Domain Image Zip files come pre-uploaded in the applic
 | Ubuntu 20.04 - OpenPLCv3                            | blink-zero    | Non-Domain  | Ubuntu 20.04                         | Minimal installation of Ubuntu 20.04 VM for non-domain environments with OpenPLC installed.             | [Download](../../assets/community/vmware_create_linux_ubuntu20.04_openplcv3.zip)   |
 | Ubuntu 22.04 - Docker and Docker Compose            | blink-zero    | Non-Domain  | Ubuntu 22.04                         | Minimal installation of Ubuntu 22.04 VM for non-domain environments with Docker & Docker Compose installed.  | [Download](../../assets/community/vmware_create_linux_ubuntu22.04_docker.zip) |
 | Windows 10 Pro - FactoryIO                          | blink-zero    | Non-Domain  | Windows 10 Professional              | Windows 10 Professional with FactoryIO and custom scene installed.                                      | [Download](../../assets/community/vmware_create_windows_10pro_factoryio.zip)       |
-| Kali 2024.1                                         | blink-zero    | Non-Domain  | Kali 2024.1                          | Kali Linux 2024.1 VM image.                                                                             | [Download](../../assets/non-domain/vmware_create_linux_kali2024.1.zip)             |
+| Kali 2024.1                                         | blink-zero    | Non-Domain  | Kali 2024.1                          | Kali Linux 2024.1 VM image.                                                                             | [Download](../../assets/community/vmware_create_linux_kali2024.1.zip)             |
 
 
 ---
