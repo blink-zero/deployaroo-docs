@@ -1,0 +1,130 @@
+---
+- name: Deploy Linux Template
+  vmware_guest:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    validate_certs: "{{ vcenter_validate_certs }}"
+    datacenter: "{{ vcenter_datacenter }}"
+    name: "{{ guest_hostname }}"
+    folder: "{{ vm_folder }}"
+    state: "{{ vm_state }}"
+    guest_id: "{{ vm_guestid }}"
+    esxi_hostname: "{{ esxi_host }}"
+    template: "{{ template_name }}"
+    disk:
+      - size_gb: "{{ lin_disk_size }}"
+        type: "{{ vm_type }}"
+        datastore: "{{ vm_disk_datastore }}"
+    hardware:
+      memory_mb: "{{ guest_vram }}"
+      num_cpus: "{{ guest_vcpu }}"
+      scsi: "{{ vm_hw_scsi }}"
+    networks:
+      - name: "{{ vm_net_name }}"
+        ip: "{{ inventory_hostname }}"
+        netmask: "{{ netmask }}"
+        gateway: "{{ gateway }}"
+    customization:
+      dns_servers:
+        - "{{ dns1 }}"
+        - "{{ dns2 }}"
+    wait_for_ip_address: True
+  delegate_to: localhost
+
+- name: Add host to Ansible inventory
+  ansible.builtin.add_host:
+    hostname: '{{ inventory_hostname }}'
+    ansible_user: '{{ linux_template_username }}'
+    ansible_password: '{{ linux_template_password }}'
+    ansible_ssh_extra_args: '-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
+
+- name: Debug - Check connectivity to the new host
+  wait_for:
+    host: '{{ inventory_hostname }}'
+    port: 22
+    timeout: 30
+
+- name: Wait for system to become reachable over SSH
+  wait_for_connection:
+    timeout: 900
+    connect_timeout: 60
+    sleep: 10
+    delay: 0
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Ubuntu - Update package cache
+  become: true
+  apt:
+    update_cache: yes
+  when: template_name.find("ubuntu") != -1
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Ubuntu - Update and upgrade apt packages
+  ansible.builtin.apt:
+    upgrade: yes
+    update_cache: yes
+    cache_valid_time: 86400
+  when: template_name.find("ubuntu") != -1
+  become: yes
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Clone OpenPLC repository
+  git:
+    repo: 'https://github.com/thiagoralves/OpenPLC_v3.git'
+    dest: '/home/{{ linux_template_username }}/OpenPLC_v3'
+  become: true
+  become_user: '{{ linux_template_username }}'
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Install OpenPLC
+  shell: |
+    cd /home/{{ linux_template_username }}/OpenPLC_v3
+    sudo ./install.sh linux
+  become: true
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Disable UFW
+  ufw:
+    state: disabled
+  become: true
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Reboot machine
+  ansible.builtin.reboot:
+    msg: "Rebooting..."
+  become: true
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Wait for system to become reachable over SSH after reboot
+  wait_for_connection:
+    timeout: 900
+    connect_timeout: 60
+    sleep: 10
+    delay: 0
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Check status of OpenPLC service
+  shell: systemctl status openplc.service
+  register: openplc_status
+  become: true
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Enable and start OpenPLC service if not running
+  shell: |
+    systemctl enable openplc.service
+    systemctl start openplc.service
+  when: openplc_status.stdout.find('inactive') != -1
+  become: true
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Check final status of OpenPLC service
+  shell: systemctl status openplc.service
+  register: openplc_final_status
+  become: true
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Ensure OpenPLC service is running
+  fail:
+    msg: "OpenPLC service is not running"
+  when: openplc_final_status.stdout.find('running') == -1
