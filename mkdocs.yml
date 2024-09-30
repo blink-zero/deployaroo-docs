@@ -42,10 +42,10 @@ nav:
   #     - Application Structure: developer-guide/application-structure.md
   #     - Adding New Features: developer-guide/adding-new-features.md
   - Change Log:
-      - v1.0.0: changelog/v1.0.0.md
-      - v1.0.0RC: changelog/v1.0.0RC.md
-      - v1.0.1beta: changelog/v1.0.1beta.md
-      - v1.0.0beta: changelog/v1.0.0beta.md
+      - v1.0.0 (Septemeber 30, 2024): changelog/v1.0.0.md
+      - v1.0.0RC (July 29, 2024): changelog/v1.0.0RC.md
+      - v1.0.1beta (June 22, 2024): changelog/v1.0.1beta.md
+      - v1.0.0beta (June 17, 2024): changelog/v1.0.0beta.md
 
 # Theme configuration
 theme:
