@@ -51,6 +51,7 @@ All of the Non-Domain and Domain Image Zip files come pre-uploaded in the applic
 | Ubuntu 22.04 - Gitea Container                      | blink-zero    | Non-Domain  | Ubuntu 22.04                         | Minimal installation of Ubuntu 22.04 VM for non-domain environments with Gitea installed.               | [Download](../../assets/community/vmware_create_linux_ubuntu22.04_gitea.zip)               |
 | Ubuntu 22.04 - Jellyfin Container                   | blink-zero    | Non-Domain  | Ubuntu 22.04                         | Minimal installation of Ubuntu 22.04 VM for non-domain environments with Jellyfin installed.            | [Download](../../assets/community/vmware_create_linux_ubuntu22.04_jellyfin.zip)             |
 | Ubuntu 22.04 - Uptime Kuma  Container               | blink-zero    | Non-Domain  | Ubuntu 22.04                         | Minimal installation of Ubuntu 22.04 VM for non-domain environments with Uptime Kuma installed.         | [Download](../../assets/community/vmware_create_linux_ubuntu22.04_uptimekuma.zip)           |
+| Ubuntu 22.04 - Mealie Container               | blink-zero    | Non-Domain  | Ubuntu 22.04                         | Minimal installation of Ubuntu 22.04 VM for non-domain environments with Mealie installed.         | [Download](../../assets/community/vmware_create_linux_ubuntu22.04_mealie.zip)           |
 
 
 ---
