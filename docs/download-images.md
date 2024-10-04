@@ -55,7 +55,9 @@ All of the Non-Domain and Domain Image Zip files come pre-uploaded in the applic
 | Ubuntu 22.04 - Wordpress Container               | blink-zero    | Non-Domain  | Ubuntu 22.04                         | Minimal installation of Ubuntu 22.04 VM for non-domain environments with Wordpress installed.         | [Download](../../assets/community/vmware_create_linux_ubuntu22.04_wordpress.zip)           |
 | Ubuntu 22.04 - Linkstack Container               | blink-zero    | Non-Domain  | Ubuntu 22.04                         | Minimal installation of Ubuntu 22.04 VM for non-domain environments with Linkstack installed.         | [Download](../../assets/community/vmware_create_linux_ubuntu22.04_linkstack.zip)           |
 | Ubuntu 22.04 - Ghost Container               | blink-zero    | Non-Domain  | Ubuntu 22.04                         | Minimal installation of Ubuntu 22.04 VM for non-domain environments with Ghost installed.         | [Download](../../assets/community/vmware_create_linux_ubuntu22.04_ghost.zip)           |
-
+| Ubuntu 22.04 - Odoo Container               | blink-zero    | Non-Domain  | Ubuntu 22.04                         | Minimal installation of Ubuntu 22.04 VM for non-domain environments with Odoo installed.         | [Download](../../assets/community/vmware_create_linux_ubuntu22.04_odoo.zip)           |
+| Ubuntu 22.04 - Budibase Container               | blink-zero    | Non-Domain  | Ubuntu 22.04                         | Minimal installation of Ubuntu 22.04 VM for non-domain environments with Budibase installed.         | [Download](../../assets/community/vmware_create_linux_ubuntu22.04_budibase.zip)           |
+| Ubuntu 22.04 - Noodl Cloud Service Container               | blink-zero    | Non-Domain  | Ubuntu 22.04                         | Minimal installation of Ubuntu 22.04 VM for non-domain environments with Noodl Cloud Service installed.         | [Download](../../assets/community/vmware_create_linux_ubuntu22.04_noodl.zip)           |
 
 ---
 
