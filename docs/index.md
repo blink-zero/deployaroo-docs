@@ -3,11 +3,8 @@
 ![Deployaroo Logo](assets/deployaroo_text_lightgrey.png)
    
 > **🎉 New and Improved Interface! 🎉**  
-> Experience the sleeker, more intuitive design for easier VM deployments in this version.
 
 **Deployaroo** is a sleek and intuitive web interface for deploying VMware vSphere virtual machine templates using Ansible.
-
-> v1.0.0 RC now available with a whole bunch of new features!
 
 ---
 
