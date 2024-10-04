@@ -1,0 +1,128 @@
+---
+# Playbook: vmware_create_linux_ubuntu22.04_mealie
+# Version: 1.0
+# Date: 2024-09-30
+# Author: blink-zero
+# Description: This playbook automates the deployment of a Ubuntu 22.04 virtual machine with Mealie installed in a Docker Container.
+
+- name: Deploy Linux Template
+  vmware_guest:
+    hostname: "{{ vcenter_hostname }}"       # vCenter server hostname
+    username: "{{ vcenter_username }}"       # vCenter server username
+    password: "{{ vcenter_password }}"       # vCenter server password
+    validate_certs: "{{ vcenter_validate_certs }}"  # Whether to validate SSL certificates
+    datacenter: "{{ vcenter_datacenter }}"   # Datacenter name
+    name: "{{ guest_hostname }}"             # Name of the new virtual machine
+    folder: "{{ vm_folder }}"                # Folder in which to create the VM
+    state: "{{ vm_state }}"                  # Desired state of the VM (present/absent)
+    guest_id: "{{ vm_guestid }}"             # Guest OS identifier
+    esxi_hostname: "{{ esxi_host }}"         # ESXi host on which to deploy the VM
+    template: "{{ template_name }}"          # Name of the template to use for the VM
+    disk:
+      - size_gb: "{{ lin_disk_size }}"       # Size of the VM disk in GB
+        type: "{{ vm_type }}"                # Disk type (thin/thick)
+        datastore: "{{ vm_disk_datastore }}" # Datastore for the VM disk
+    hardware:
+      memory_mb: "{{ guest_vram }}"          # Memory size in MB
+      num_cpus: "{{ guest_vcpu }}"           # Number of CPUs
+      scsi: "{{ vm_hw_scsi }}"               # SCSI controller type
+    networks:
+      - name: "{{ vm_net_name }}"            # Network name
+        ip: "{{ inventory_hostname }}"       # IP address of the VM
+        netmask: "{{ netmask }}"             # Network mask
+        gateway: "{{ gateway }}"             # Gateway address
+    customization:
+      dns_servers:
+        - "{{ dns1 }}"                       # Primary DNS server
+        - "{{ dns2 }}"                       # Secondary DNS server
+    wait_for_ip_address: True                # Wait for the IP address to be assigned
+  delegate_to: localhost
+
+- name: Add host to Ansible inventory
+  ansible.builtin.add_host:
+    hostname: '{{ inventory_hostname }}'           # Hostname of the new VM
+    ansible_user: '{{ linux_template_username }}'  # SSH username for the new VM
+    ansible_password: '{{ linux_template_password }}'  # SSH password for the new VM
+    ansible_ssh_extra_args: '-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'  # SSH options
+
+- name: Debug - Check connectivity to the new host
+  wait_for:
+    host: '{{ inventory_hostname }}'         # Hostname to check
+    port: 22                                 # Port to check (SSH)
+    timeout: 30                              # Timeout in seconds
+
+- name: Wait for system to become reachable over SSH
+  wait_for_connection:
+    timeout: 900                             # Timeout in seconds
+    connect_timeout: 60                      # Connection timeout in seconds
+    sleep: 10                                # Sleep time between retries
+    delay: 0                                 # Initial delay
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Update and upgrade apt packages
+  apt:
+    upgrade: yes                             # Upgrade apt packages
+    update_cache: yes                        # Update the apt package cache
+    cache_valid_time: 86400                  # Cache validity time in seconds
+  become: yes                                # Run the task as root
+  delegate_to: '{{ inventory_hostname }}'
+
+# Install Docker using convenience script
+- name: Install Docker using convenience script
+  shell: |
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    sh get-docker.sh
+  become: yes
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Install Docker Compose
+  apt:
+    name:
+      - docker-compose-plugin
+    state: present
+    update_cache: yes
+  become: yes
+  delegate_to: '{{ inventory_hostname }}'
+
+# Install Mealie
+
+- name: Create Mealie data directory
+  file:
+    path: /opt/mealie-data
+    state: directory
+    owner: 1000  # Adjust UID if needed
+    group: 1000  # Adjust GID if needed
+    mode: '0755'
+  become: yes
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Create docker-compose.yml file for Mealie
+  copy:
+    content: |
+      services:
+        mealie:
+          image: ghcr.io/mealie-recipes/mealie:v1.12.0 
+          restart: always
+          ports:
+            - "9925:9000" 
+          volumes:
+            - mealie-data:/app/data/
+          environment:
+            ALLOW_SIGNUP: "false"
+            PUID: 1000
+            PGID: 1000
+            TZ: Australia/Sydney
+            MAX_WORKERS: 1
+            WEB_CONCURRENCY: 1
+
+      volumes:
+        mealie-data:
+    dest: /opt/mealie/docker-compose.yml
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Start Mealie container
+  shell: docker compose up -d
+  args:
+    chdir: /opt/mealie
+  become: yes
+  delegate_to: '{{ inventory_hostname }}'

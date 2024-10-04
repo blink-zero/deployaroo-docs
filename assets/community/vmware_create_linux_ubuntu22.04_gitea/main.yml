@@ -1,0 +1,162 @@
+---
+# Playbook: vmware_create_linux_ubuntu22.04_gitea
+# Version: 1.0
+# Date: 2024-09-29
+# Author: blink-zero
+# Description: This playbook automates the deployment of a Ubuntu 22.04 virtual machine with Gitea installed in a Docker Container.
+
+- name: Deploy Linux Template
+  vmware_guest:
+    hostname: "{{ vcenter_hostname }}"       # vCenter server hostname
+    username: "{{ vcenter_username }}"       # vCenter server username
+    password: "{{ vcenter_password }}"       # vCenter server password
+    validate_certs: "{{ vcenter_validate_certs }}"  # Whether to validate SSL certificates
+    datacenter: "{{ vcenter_datacenter }}"   # Datacenter name
+    name: "{{ guest_hostname }}"             # Name of the new virtual machine
+    folder: "{{ vm_folder }}"                # Folder in which to create the VM
+    state: "{{ vm_state }}"                  # Desired state of the VM (present/absent)
+    guest_id: "{{ vm_guestid }}"             # Guest OS identifier
+    esxi_hostname: "{{ esxi_host }}"         # ESXi host on which to deploy the VM
+    template: "{{ template_name }}"          # Name of the template to use for the VM
+    disk:
+      - size_gb: "{{ lin_disk_size }}"       # Size of the VM disk in GB
+        type: "{{ vm_type }}"                # Disk type (thin/thick)
+        datastore: "{{ vm_disk_datastore }}" # Datastore for the VM disk
+    hardware:
+      memory_mb: "{{ guest_vram }}"          # Memory size in MB
+      num_cpus: "{{ guest_vcpu }}"           # Number of CPUs
+      scsi: "{{ vm_hw_scsi }}"               # SCSI controller type
+    networks:
+      - name: "{{ vm_net_name }}"            # Network name
+        ip: "{{ inventory_hostname }}"       # IP address of the VM
+        netmask: "{{ netmask }}"             # Network mask
+        gateway: "{{ gateway }}"             # Gateway address
+    customization:
+      dns_servers:
+        - "{{ dns1 }}"                       # Primary DNS server
+        - "{{ dns2 }}"                       # Secondary DNS server
+    wait_for_ip_address: True                # Wait for the IP address to be assigned
+  delegate_to: localhost
+
+- name: Add host to Ansible inventory
+  ansible.builtin.add_host:
+    hostname: '{{ inventory_hostname }}'           # Hostname of the new VM
+    ansible_user: '{{ linux_template_username }}'  # SSH username for the new VM
+    ansible_password: '{{ linux_template_password }}'  # SSH password for the new VM
+    ansible_ssh_extra_args: '-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'  # SSH options
+
+- name: Debug - Check connectivity to the new host
+  wait_for:
+    host: '{{ inventory_hostname }}'         # Hostname to check
+    port: 22                                 # Port to check (SSH)
+    timeout: 30                              # Timeout in seconds
+
+- name: Wait for system to become reachable over SSH
+  wait_for_connection:
+    timeout: 900                             # Timeout in seconds
+    connect_timeout: 60                      # Connection timeout in seconds
+    sleep: 10                                # Sleep time between retries
+    delay: 0                                 # Initial delay
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Update and upgrade apt packages
+  apt:
+    upgrade: yes                             # Upgrade apt packages
+    update_cache: yes                        # Update the apt package cache
+    cache_valid_time: 86400                  # Cache validity time in seconds
+  become: yes                                # Run the task as root
+  delegate_to: '{{ inventory_hostname }}'
+
+# Install Docker using convenience script
+- name: Install Docker using convenience script
+  shell: |
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    sh get-docker.sh
+  become: yes
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Install Docker Compose
+  apt:
+    name:
+      - docker-compose-plugin
+    state: present
+    update_cache: yes
+  become: yes
+  delegate_to: '{{ inventory_hostname }}'
+
+# Install Gitea
+
+# Create directories for Gitea data and database (if using host volumes)
+- name: Create Gitea data directory
+  file:
+    path: /opt/gitea
+    state: directory
+    owner: 1000  # Adjust UID if needed
+    group: 1000  # Adjust GID if needed
+    mode: '0755'
+  become: yes
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Create database data directory (if using host volumes)
+  file:
+    path: /opt/gitea-db
+    state: directory
+    owner: 1000  # Adjust UID if needed
+    group: 1000  # Adjust GID if needed
+    mode: '0755'
+  become: yes
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Create docker-compose.yml file
+  copy:
+    content: |
+      version: "3"
+
+      networks:
+        gitea:
+          external: false
+
+      services:
+        server:
+          image: gitea/gitea:1.22.2
+          container_name: gitea
+          environment:
+            - USER_UID=1000
+            - USER_GID=1000
+            - GITEA__database__DB_TYPE=postgres
+            - GITEA__database__HOST=db:5432
+            - GITEA__database__NAME=gitea
+            - GITEA__database__USER=gitea
+            - GITEA__database__PASSWD=gitea
+          restart: always
+          networks:
+            - gitea
+          volumes:
+            - /opt/gitea:/data
+            - /etc/timezone:/etc/timezone:ro
+            - /etc/localtime:/etc/localtime:ro
+          ports:
+            - "3000:3000"
+            - "222:22"
+          depends_on:
+            - db
+
+        db:
+          image: postgres:14
+          environment:
+            - POSTGRES_USER=gitea
+            - POSTGRES_PASSWORD=gitea
+            - POSTGRES_DB=gitea
+          networks:
+            - gitea
+          volumes:
+            - /opt/gitea-db:/var/lib/postgresql/data
+    dest: /opt/gitea/docker-compose.yml
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Start Gitea containers
+  shell: docker compose up -d
+  args:
+    chdir: /opt/gitea
+  become: yes
+  delegate_to: '{{ inventory_hostname }}'
