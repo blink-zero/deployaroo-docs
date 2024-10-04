@@ -42,6 +42,7 @@ nav:
   #     - Application Structure: developer-guide/application-structure.md
   #     - Adding New Features: developer-guide/adding-new-features.md
   - Change Log:
+      - v1.0.1 (October 04, 2024): changelog/v1.0.1.md
       - v1.0.0 (September 30, 2024): changelog/v1.0.0.md
       - v1.0.0RC (July 29, 2024): changelog/v1.0.0RC.md
       - v1.0.1beta (June 22, 2024): changelog/v1.0.1beta.md
