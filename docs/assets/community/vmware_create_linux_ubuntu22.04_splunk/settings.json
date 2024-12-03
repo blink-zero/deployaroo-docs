@@ -1,0 +1,9 @@
+{
+    "image_template_name": "linux-ubuntu-22.04-lts-v23.02",
+    "image_human_name": "Ubuntu 22.04 - Splunk",
+    "image_type": "linux",
+    "ansible_match_name": "lin_ubuntu22.04_splunk",
+    "vmware_os_type": "ubuntu64Guest",
+    "image_icon_name": "applications/splunk.png",
+    "network_type": "ansible-deploy-vm"
+}
