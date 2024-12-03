@@ -1,0 +1,313 @@
+---
+# Playbook: vmware_create_linux_ubuntu22.04_elk
+# Version: 1.0
+# Description: This playbook automates the deployment of a Ubuntu 22.04 virtual machine with ELK stack in Docker.
+
+- name: Deploy Linux Template
+  vmware_guest:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    validate_certs: "{{ vcenter_validate_certs }}"
+    datacenter: "{{ vcenter_datacenter }}"
+    name: "{{ guest_hostname }}"
+    folder: "{{ vm_folder }}"
+    state: "{{ vm_state }}"
+    guest_id: "{{ vm_guestid }}"
+    esxi_hostname: "{{ esxi_host }}"
+    template: "{{ template_name }}"
+    disk:
+      - size_gb: "{{ lin_disk_size }}"
+        type: "{{ vm_type }}"
+        datastore: "{{ vm_disk_datastore }}"
+    hardware:
+      memory_mb: "{{ guest_vram }}"
+      num_cpus: "{{ guest_vcpu }}"
+      scsi: "{{ vm_hw_scsi }}"
+    networks:
+      - name: "{{ vm_net_name }}"
+        ip: "{{ inventory_hostname }}"
+        netmask: "{{ netmask }}"
+        gateway: "{{ gateway }}"
+    customization:
+      dns_servers:
+        - "{{ dns1 }}"
+        - "{{ dns2 }}"
+    wait_for_ip_address: True
+  delegate_to: localhost
+
+- name: Add host to Ansible inventory
+  ansible.builtin.add_host:
+    hostname: '{{ inventory_hostname }}'
+    ansible_user: '{{ linux_template_username }}'
+    ansible_password: '{{ linux_template_password }}'
+    ansible_ssh_extra_args: '-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
+
+- name: Debug - Check connectivity to the new host
+  wait_for:
+    host: '{{ inventory_hostname }}'
+    port: 22
+    timeout: 30
+
+- name: Wait for system to become reachable over SSH
+  wait_for_connection:
+    timeout: 900
+    connect_timeout: 60
+    sleep: 10
+    delay: 0
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Update and upgrade apt packages
+  apt:
+    upgrade: yes
+    update_cache: yes
+    cache_valid_time: 86400
+  become: yes
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Install Docker using convenience script
+  shell: |
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    sh get-docker.sh
+  become: yes
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Install Docker Compose
+  apt:
+    name: docker-compose-plugin
+    state: present
+    update_cache: yes
+  become: yes
+  delegate_to: '{{ inventory_hostname }}'
+
+
+# Create ELK stack directory with proper ownership
+- name: Create ELK stack directory structure
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+    owner: "{{ ansible_user }}"  # Set owner to the ansible user
+    group: "{{ ansible_user }}"  # Set group to the ansible user
+  loop:
+    - /opt/containers/elk-stack
+    - /opt/containers/elk-stack/esdata
+  become: yes
+  delegate_to: '{{ inventory_hostname }}'
+
+
+# Set permissions for elasticsearch data directory
+- name: Set elasticsearch data directory permissions
+  file:
+    path: /opt/containers/elk-stack/esdata
+    owner: 1000
+    group: 1000
+    mode: '0755'
+  become: yes
+  delegate_to: '{{ inventory_hostname }}'
+
+# Create .env file for ELK stack
+- name: Create .env file for ELK stack
+  copy:
+    content: |
+      ELASTIC_PASSWORD=changeme123secure
+      KIBANA_PASSWORD=changeme123secure
+    dest: /opt/containers/elk-stack/.env
+    mode: '0600'
+  delegate_to: '{{ inventory_hostname }}'
+
+# Create docker-compose.yml file for ELK stack
+- name: Create docker-compose.yml file for ELK stack
+  copy:
+    content: |
+      version: "3"
+      services:
+        setup:
+          image: docker.elastic.co/elasticsearch/elasticsearch:8.15.1
+          environment:
+            - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+            - KIBANA_PASSWORD=${KIBANA_PASSWORD}
+          container_name: setup
+          command:
+            - bash
+            - -c
+            - |
+              echo "Waiting for Elasticsearch availability";
+              until curl -s http://elasticsearch:9200 | grep -q "missing authentication credentials"; do sleep 30; done;
+              echo "Setting kibana_system password";
+              until curl -s -X POST -u "elastic:${ELASTIC_PASSWORD}" -H "Content-Type: application/json" http://elasticsearch:9200/_security/user/kibana_system/_password -d "{\"password\":\"${KIBANA_PASSWORD}\"}" | grep -q "^{}"; do sleep 10; done;
+              echo "All done!";
+
+        elasticsearch:
+          image: docker.elastic.co/elasticsearch/elasticsearch:8.15.1
+          container_name: elasticsearch
+          volumes:
+            - ./esdata:/usr/share/elasticsearch/data
+          ports:
+            - 127.0.0.1:9200:9200
+          environment:
+            - discovery.type=single-node
+            - cluster.name=elasticsearch
+            - bootstrap.memory_lock=true
+            - ES_JAVA_OPTS=-Xms1g -Xmx1g
+            - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+            - xpack.security.http.ssl.enabled=false
+
+        kibana:
+          image: docker.elastic.co/kibana/kibana:8.15.1
+          container_name: kibana
+          ports:
+            - 127.0.0.1:5601:5601
+          environment:
+            - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+            - ELASTICSEARCH_USERNAME=kibana_system
+            - ELASTICSEARCH_PASSWORD=${KIBANA_PASSWORD}
+            - TELEMETRY_ENABLED=false
+
+        logstash:
+          image: docker.elastic.co/logstash/logstash:8.15.1
+          container_name: logstash
+          command:
+            - /bin/bash
+            - -c
+            - |
+              cp /usr/share/logstash/pipeline/logstash.yml /usr/share/logstash/config/logstash.yml
+              echo "Waiting for Elasticsearch availability";
+              until curl -s http://elasticsearch:9200 | grep -q "missing authentication credentials"; do sleep 1; done;
+              echo "Starting logstash";
+              /usr/share/logstash/bin/logstash -f /usr/share/logstash/pipeline/logstash.conf
+          ports:
+            - 127.0.0.1:5044:5044
+          environment:
+            - xpack.monitoring.enabled=false
+            - ELASTIC_USER=elastic
+            - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+            - ELASTIC_HOSTS=http://elasticsearch:9200
+          volumes:
+            - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+
+      volumes:
+        esdata:
+    dest: /opt/containers/elk-stack/docker-compose.yml
+  delegate_to: '{{ inventory_hostname }}'
+
+# Create logstash.conf file
+- name: Create logstash.conf file
+  copy:
+    content: |
+      input {
+          file {
+              path => "/var/log/dpkg.log"
+              start_position => "beginning"
+          }
+      }
+
+      filter { }
+
+      output {
+          elasticsearch {
+              hosts => "${ELASTIC_HOSTS}"
+              user => "elastic"
+              password => "${ELASTIC_PASSWORD}"
+              index => "logstash-%{+YYYY.MM.dd}"
+          }
+          stdout { }
+      }
+    dest: /opt/containers/elk-stack/logstash.conf
+  delegate_to: '{{ inventory_hostname }}'
+
+# Configure UFW firewall
+- name: Install UFW
+  apt:
+    name: ufw
+    state: present
+  become: yes
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Configure UFW rules
+  ufw:
+    rule: "{{ item.rule }}"
+    port: "{{ item.port }}"
+    proto: tcp
+  loop:
+    - { rule: 'allow', port: '22' }
+    - { rule: 'allow', port: '80' }
+    - { rule: 'allow', port: '443' }
+    - { rule: 'deny', port: '9200' }
+    - { rule: 'deny', port: '5601' }
+  become: yes
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Enable UFW
+  ufw:
+    state: enabled
+  become: yes
+  delegate_to: '{{ inventory_hostname }}'
+
+# Install and configure Nginx
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+  become: yes
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Remove default Nginx configuration
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - /etc/nginx/sites-available/default
+    - /etc/nginx/sites-enabled/default
+  become: yes
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Create Kibana Nginx configuration
+  copy:
+    content: |
+      server {
+          listen 80;
+          server_name {{ ansible_host }};
+
+          location / {
+              proxy_pass http://127.0.0.1:5601;
+              proxy_set_header Host $host;
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header X-Forwarded-Proto $scheme;
+          }
+      }
+    dest: /etc/nginx/sites-available/kibana
+    mode: '0644'
+  become: yes
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Create Nginx symbolic link
+  file:
+    src: /etc/nginx/sites-available/kibana
+    dest: /etc/nginx/sites-enabled/kibana
+    state: link
+  become: yes
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Test Nginx configuration
+  command: nginx -t
+  become: yes
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Start and enable Nginx
+  systemd:
+    name: nginx
+    state: restarted
+    enabled: yes
+  become: yes
+  delegate_to: '{{ inventory_hostname }}'
+
+# Start ELK stack
+- name: Start ELK stack
+  shell: docker compose up -d
+  args:
+    chdir: /opt/containers/elk-stack
+  become: yes
+  delegate_to: '{{ inventory_hostname }}'
